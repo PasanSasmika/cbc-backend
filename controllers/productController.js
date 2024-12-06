@@ -32,17 +32,31 @@ export function Postproduct(req,res){
 
 }
 
-export function Getproduct(req,res){
+export async function Getproduct(req,res){
 
-    Product.find().then((productList)=>{
-            res.json({
-                list: productList
-            })
-    }).catch (()=>{
-        res.json({
-            message: "Error fetching products"
-        })
+    // Product.find().then((productList)=>{
+    //         res.json({
+    //             list: productList
+    //         })
+    // }).catch (()=>{
+    //     res.json({
+    //         message: "Error fetching products"
+    //     })
+    // }
+
+
+    try{
+    const productList = await Product.find()
+
+    res.json({
+        list : productList
     })
+} catch(e){
+    res.json({
+        message: "Error"
+    })
+}
+
 }
 
 export function GetproductByName(req,res){
