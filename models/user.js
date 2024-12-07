@@ -40,3 +40,7 @@ const UserSchema = mongoose.Schema({
 const User = mongoose.model("users", UserSchema)
 
 export default User;
+
+
+// pasansasmika@example.com  456 admin
+//  "pasansasmika@customer.com" 456 customer
