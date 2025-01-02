@@ -74,11 +74,11 @@ export function loginUser(req,res){
                         message: "Logged in successful",
                         token: token,
                         user: {
-                            firstName : firstName,
-                            lastName : lastName,
-                            email: email,
-                            profilepic: profilepic,
-                            type : type
+                            firstName : user.firstName,
+                            lastName : user.lastName,
+                            email: user.email,
+                            profilepic: user.profilepic,
+                            type : user.type
                         }
                     })
 
