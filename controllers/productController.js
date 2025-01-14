@@ -81,3 +81,19 @@ export function updateProduct(req,res){
         })
     })
 }
+
+export async function getProductById(req,res) {
+
+    try {
+        const productId = req.params.productId
+
+        const product = await Product.findOne({productId : productId})
+
+        res.json(product)
+    } catch (e) {
+        res.status(500).json({
+            e
+        })
+    }
+    
+}
