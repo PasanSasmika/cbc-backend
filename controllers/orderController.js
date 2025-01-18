@@ -1,6 +1,6 @@
 import Order from "../models/order.js";
 import Product from "../models/products.js";
-import { isCustomer } from "./userController.js";
+import { isAdmin, isCustomer } from "./userController.js";
 
 export async function createOrder(req, res) {
   // check login as customer
@@ -81,17 +81,39 @@ export async function createOrder(req, res) {
   }
 }
 
+
+
+
 export async function getOrders(req, res) {
   try {
-    const orders = await Order.find({ email: req.user.email });
+    if(isCustomer(req)){
 
-    res.json(orders);
+        const orders = await Order.find({ email: req.user.email });
+        res.json(orders);
+        return;
+
+    }else if(isAdmin(req)){
+        const orders = await Order.find({});
+
+        res.json(orders);
+        return;
+    }else{
+        res.json({
+            message: "Please login to view orders"
+        })
+    }
+   
   } catch (error) {
     res.status(500).json({
       message: error.message,
     });
   }
 }
+
+
+
+
+
 
 export async function getQuote(req, res) {
   try {
