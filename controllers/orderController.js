@@ -40,10 +40,10 @@ export async function createOrder(req, res) {
         productId: newOrderData.orderedItems[i].productId,
       });
 
-      if ([product == null]) {
+      if (product == null) {
         res.json({
           message:
-            "Product with  " +
+            "Product with id  " +
             newOrderData.orderedItems[i].productId +
             "not found",
         });
@@ -55,7 +55,7 @@ export async function createOrder(req, res) {
         name: product.productName,
         price: product.lastPrice,
         quantity: newOrderData.orderedItems[i].qty,
-        image: product.image[0],
+        image: product.Images[0],
       };
     }
 
