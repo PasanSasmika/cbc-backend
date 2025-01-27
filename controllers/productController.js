@@ -97,3 +97,18 @@ export async function getProductById(req,res) {
     }
     
 }
+
+export function getProductsByCategory(req, res) {
+    const { category } = req.params;
+
+    Product.find({ category }) 
+        .then((products) => {
+            res.json(products); 
+        })
+        .catch((error) => {
+            res.status(500).json({
+                message: "Error fetching products by category",
+                error,
+            });
+        });
+}
