@@ -28,3 +28,10 @@ export  function createBlog(req,res){
     })
 
 }
+
+export function getBlog(req,res){
+    Blogs.find({}).then((blogs)=>{
+        res.json(blogs)
+    })
+}
+
