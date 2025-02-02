@@ -59,3 +59,29 @@ export function deleteBlogs(req,res){
 
 }
 
+
+
+export function updateBlogs(req,res){
+    if(!isAdmin(req)){
+        res.status(403).json({
+            message: "Plese login as admin to update blogs"
+        })
+        return
+    }
+
+    const blogId = req.params.blogId
+    const newBlogsData = req.body
+
+    Blogs.updateOne(
+        {blogId : blogId},
+        newBlogsData
+    ).then(()=>{
+        res.json({
+            message: "Blog updated..!"
+        })
+    }).catch((error)=>{
+        res.status(403).json({
+            message: error
+        })
+    })
+}
