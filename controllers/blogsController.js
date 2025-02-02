@@ -35,3 +35,27 @@ export function getBlog(req,res){
     })
 }
 
+export function deleteBlogs(req,res){
+    if(!isAdmin(req)){
+        res.status(403).json({
+            message: "Please login as an admin to delete blogs.!" 
+        })
+        return
+    }
+
+    const blogId = req.params.blogId
+
+    Blogs.deleteOne(
+        {blogId: blogId}
+    ).then(()=>{
+        res.json({
+            message: "Blog deleted"
+        })
+    }).catch((error)=>{
+        res.status(403).json({
+            message: error
+        })
+    })
+
+}
+
