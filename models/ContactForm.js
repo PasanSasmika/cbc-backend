@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const contactFormSchema = mongoose.Schema({
     contactId : {
-        type : String,
-        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        default: () => new mongoose.Types.ObjectId(), // Auto-generated
         unique: true
     },
 
@@ -15,6 +15,11 @@ const contactFormSchema = mongoose.Schema({
     email: {
         type : String,
         required : true
+    },
+
+    subject:{
+        type: String,
+        required: true
     },
 
     message: {
