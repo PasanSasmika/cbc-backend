@@ -201,3 +201,11 @@ export async function getUser(req,res){
     }
     res.json(req.user)
 }
+
+
+export function logOut(req,res){
+    res.clearCookie("token");
+    res.json({
+        message:"User Loged out Successfully...!"
+    })
+}
