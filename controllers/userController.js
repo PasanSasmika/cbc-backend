@@ -48,6 +48,50 @@ user.save().then(()=>{
 
 }
 
+
+export function createCustomer(req, res) {
+    const newUserData = req.body;
+
+    // Ensure no validation error for customer registration (e.g. same email already exists)
+    User.findOne({ email: newUserData.email })
+        .then(existingUser => {
+            if (existingUser) {
+                return res.json({
+                    message: "A user with this email already exists."
+                });
+            }
+
+            // Hash the password before saving it to the database
+            newUserData.password = bcrypt.hashSync(newUserData.password, 10);
+
+            // Create the new user
+            const user = new User(newUserData);
+
+            // Save the user to the database
+            user.save()
+                .then(() => {
+                    res.json({
+                        message: "Registration successfully"
+                    });
+                })
+                .catch(err => {
+                    console.error("Error creating user:", err); // Log error in the console
+                    res.json({
+                        message: "Customer user not created"
+                    });
+                });
+        })
+        .catch(err => {
+            console.error("Error checking email:", err); // Log error in the console
+            res.json({
+                message: "Error occurred while checking email",
+                error: err
+            });
+        });
+}
+
+
+
 export function loginUser(req,res){
 
     User.find({email: req.body.email}).then(

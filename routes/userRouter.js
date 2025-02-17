@@ -1,9 +1,12 @@
 import express from 'express';
-import { creatUser, getUser, googleLogin, loginUser, logOut } from '../controllers/userController.js';
+import { createCustomer, creatUser, getUser, googleLogin, loginUser, logOut } from '../controllers/userController.js';
 
 const userRouter = express.Router();
 
 userRouter.post("/",creatUser)
+
+userRouter.post("/register",createCustomer)
+
 
 userRouter.post("/login",loginUser)
 

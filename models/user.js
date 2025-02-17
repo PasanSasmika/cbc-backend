@@ -33,6 +33,10 @@ const UserSchema = mongoose.Schema({
     profilepic : {
         type : String,
         default : "https://freesvg.org/img/abstract-user-flat-3.png"
+    },
+
+    coverpic : {
+        type : String,
     }
 
 })
