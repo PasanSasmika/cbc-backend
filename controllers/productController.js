@@ -1,5 +1,5 @@
 import Product from "../models/products.js";
-import { isAdmin } from "./userController.js";
+import { isAdmin, isCustomer } from "./userController.js";
 
 export  function createProduct(req,res){
 
@@ -129,5 +129,42 @@ export async function searchProducts(req,res){
         res.status(500).json({
             e
         })
+    }
+}
+
+export async function addReview(req, res) {
+    if (!isCustomer(req)) {
+        return res.status(403).json({
+            message: "Only customers can add reviews!"
+        });
+    }
+
+    const { productId } = req.params;
+    const {  comment } = req.body;
+
+    if (!comment) {
+        return res.status(400).json({
+            message: "comment is required."
+        });
+    }
+
+    try {
+        const product = await Product.findOne({ productId });
+
+        if (!product) {
+            return res.status(404).json({ message: "Product not found." });
+        }
+
+        product.reviews.push({ comment, createdAt: new Date() });
+        await product.save();
+
+        res.json({
+            message: "Review added successfully!",
+            reviews: product.reviews
+        });
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: "Error adding review", error });
     }
 }

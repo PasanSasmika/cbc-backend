@@ -46,7 +46,14 @@ const productSchema = mongoose.Schema({
     description : {
         type: String,
         required: true
-    }
+    },
+    reviews: [
+        {
+            // rating: { type: Number, required: true, min: 1, max: 5 },
+            comment: { type: String, required: true },
+            createdAt: { type: Date, default: Date.now }
+        }
+    ]
 })
 
 const Product = mongoose.model("products", productSchema);
