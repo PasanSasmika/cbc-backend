@@ -140,9 +140,9 @@ export async function addReview(req, res) {
     }
 
     const { productId } = req.params;
-    const {  comment } = req.body;
+    const {  comment , firstName, lastName} = req.body;
 
-    if (!comment) {
+    if (!comment || !firstName || !lastName) {
         return res.status(400).json({
             message: "comment is required."
         });
@@ -155,7 +155,7 @@ export async function addReview(req, res) {
             return res.status(404).json({ message: "Product not found." });
         }
 
-        product.reviews.push({ comment, createdAt: new Date() });
+        product.reviews.push({ comment, firstName, lastName, createdAt: new Date() });
         await product.save();
 
         res.json({
@@ -166,5 +166,26 @@ export async function addReview(req, res) {
     } catch (error) {
         console.log(error)
         res.status(500).json({ message: "Error adding review", error });
+    }
+}
+
+export async function getReviews(req, res) {
+    const { productId } = req.params;
+
+    try {
+        const product = await Product.findOne({ productId });
+
+        if (!product) {
+            return res.status(404).json({ message: "Product not found." });
+        }
+
+        res.json({
+            message: "Reviews fetched successfully!",
+            reviews: product.reviews
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error fetching reviews", error });
     }
 }

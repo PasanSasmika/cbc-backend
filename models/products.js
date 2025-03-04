@@ -51,6 +51,8 @@ const productSchema = mongoose.Schema({
         {
             // rating: { type: Number, required: true, min: 1, max: 5 },
             comment: { type: String, required: true },
+            firstName:{ type: String },
+            lastName:{ type: String},
             createdAt: { type: Date, default: Date.now }
         }
     ]
