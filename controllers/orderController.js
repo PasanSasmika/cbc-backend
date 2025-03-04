@@ -54,6 +54,7 @@ export async function createOrder(req, res) {
       newProductArray[i] = {
         name: product.productName,
         price: product.lastPrice,
+        productId:product.productId,
         quantity: newOrderData.orderedItems[i].qty,
         image: product.Images[0],
       };
