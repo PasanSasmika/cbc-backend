@@ -253,3 +253,20 @@ export function logOut(req,res){
         message:"User Loged out Successfully...!"
     })
 }
+
+
+export async function getAllUsers(req, res) {
+    if(!isAdmin(req)){
+        res.status(403).json({
+            message: "Please login as an admin to view users...!" 
+        })
+        return
+    }
+    try {
+        const users = await User.find({}, '-password');
+        res.json(users);
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        res.status(500).json({ message: "Error fetching users" });
+    }
+}
