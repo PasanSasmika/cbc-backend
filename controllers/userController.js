@@ -256,12 +256,6 @@ export function logOut(req,res){
 
 
 export async function getAllUsers(req, res) {
-    if(!isAdmin(req)){
-        res.status(403).json({
-            message: "Please login as an admin to view users...!" 
-        })
-        return
-    }
     try {
         const users = await User.find({}, '-password');
         res.json(users);
