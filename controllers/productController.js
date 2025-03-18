@@ -189,3 +189,35 @@ export async function getReviews(req, res) {
         res.status(500).json({ message: "Error fetching reviews", error });
     }
 }
+
+
+
+export async function getProductStats(req, res) {
+   
+    if (!isAdmin(req)) {
+        return res.status(403).json({
+            message: "Unauthorized: Admin privileges required"
+        });
+    }
+
+    try {
+        const stats = await Product.aggregate([
+            {
+                $group: {
+                    _id: "$category",
+                    count: { $sum: 1 },
+                    totalStock: { $sum: "$stock" },
+                    averagePrice: { $avg: "$price" }
+                }
+            },
+            { $sort: { count: -1 } }
+        ]);
+        
+        res.json(stats);
+    } catch (error) {
+        res.status(500).json({ 
+            message: "Error fetching stats",
+            error: error.message 
+        });
+    }
+}
