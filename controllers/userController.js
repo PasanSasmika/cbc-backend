@@ -253,3 +253,14 @@ export function logOut(req,res){
         message:"User Loged out Successfully...!"
     })
 }
+
+
+export async function getAllUsers(req, res) {
+    try {
+        const users = await User.find({}, '-password');
+        res.json(users);
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        res.status(500).json({ message: "Error fetching users" });
+    }
+}
