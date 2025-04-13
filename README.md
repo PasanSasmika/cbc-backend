@@ -31,8 +31,20 @@ This server is built using **Node.js**, **Express.js**, and **MongoDB** to provi
 - **Hosting:** Render.com
 
 
-🧑‍💻 Developer
-Pasan Sasmika — GitHub
+## 🧑‍💻 Developer
 
-📄 License
+Pasan Sasmika — [GitHub](https://github.com/PasanSasmika)  
+📧 Email: pasansasmika198@gmail.com  
+🔗 LinkedIn: [linkedin.com/in/pasansasmika](http://www.linkedin.com/in/pasan-sasmika)
+
+## 🛡️ Badges
+
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![Render](https://img.shields.io/badge/Hosted_on-Render.com-46a2f1?style=for-the-badge&logo=render&logoColor=white)
+![VS Code](https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
+
+## 📄 License
+
 This project is licensed under the MIT License
