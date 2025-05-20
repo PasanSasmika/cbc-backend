@@ -9,9 +9,11 @@ import productRouter from './routes/productRouter.js';
 import orderRouter from './routes/orderRouter.js';
 import blogRoute from './routes/blogRoute.js';
 import contactRoute from './routes/ContactFormRoute.js';
+import job from './lib/corn.js';
 
 dotenv.config()
 
+job.start();
 const app = express();
 
 const mongoUrl = process.env.MONGODB_URI
